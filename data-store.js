@@ -11,8 +11,7 @@ const DataStore = (() => {
     const SETTINGS_KEY = 'scoreboard_settings';
 
     // ★ Cloudflare Worker — secure proxy (token lives server-side, never in browser)
-    const WORKER_URL = localStorage.getItem('scoreboard_worker_url')
-        || 'https://scoreboard-api.poornima2489.workers.dev';
+    // Worker URL is resolved at call time via getWorkerUrl() below.
 
     let saveTimeout = null;
     let currentDate = null;
@@ -131,7 +130,7 @@ const DataStore = (() => {
     // ─── Cloudflare Worker Proxy API ───
     function getWorkerUrl() {
         return localStorage.getItem('scoreboard_worker_url')
-            || 'https://scoreboard-api.poornimaramakrishnan.workers.dev';
+            || 'https://scoreboard-api.poornima2489.workers.dev';
     }
 
     async function loadFromCloud(dateStr) {
