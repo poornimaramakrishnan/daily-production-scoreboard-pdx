@@ -386,48 +386,50 @@ function showDownloads() {
 }
 
 function showSettings() {
-    const settings = DataStore.getSettings();
-    document.getElementById('ghToken').value = settings.token || '';
-    document.getElementById('ghRepo').value = settings.repo || '';
-    document.getElementById('ghBranch').value = settings.branch || 'main';
+    document.getElementById('workerUrl').value =
+        localStorage.getItem('scoreboard_worker_url') || '';
     document.getElementById('syncStatus').className = 'sync-status';
     document.getElementById('syncStatus').style.display = 'none';
     document.getElementById('settingsModal').style.display = 'flex';
+
+    // Auto-test connection when opening
+    testCloudConnection();
 }
 
 function saveSettings() {
-    const settings = {
-        token: document.getElementById('ghToken').value.trim(),
-        repo: document.getElementById('ghRepo').value.trim(),
-        branch: document.getElementById('ghBranch').value.trim() || 'main'
-    };
-    DataStore.saveSettingsToStorage(settings);
-    
+    const customUrl = document.getElementById('workerUrl').value.trim();
+    if (customUrl) {
+        localStorage.setItem('scoreboard_worker_url', customUrl);
+    } else {
+        localStorage.removeItem('scoreboard_worker_url');
+    }
+    DataStore.saveSettingsToStorage({ workerUrl: customUrl || '' });
+
     const status = document.getElementById('syncStatus');
     status.className = 'sync-status success';
-    status.textContent = '✓ Settings saved. Data will sync to GitHub on next edit.';
+    status.textContent = '✓ Settings saved.';
     status.style.display = 'block';
-    
-    setTimeout(() => closeModal('settingsModal'), 1500);
+
+    setTimeout(() => closeModal('settingsModal'), 1200);
 }
 
-async function testGitHubConnection() {
-    const status = document.getElementById('syncStatus');
-    status.className = 'sync-status info';
-    status.textContent = 'Testing connection...';
-    status.style.display = 'block';
-
-    // Temporarily save settings for testing
-    const tempSettings = {
-        token: document.getElementById('ghToken').value.trim(),
-        repo: document.getElementById('ghRepo').value.trim(),
-        branch: document.getElementById('ghBranch').value.trim() || 'main'
-    };
-    DataStore.saveSettingsToStorage(tempSettings);
+async function testCloudConnection() {
+    const box = document.getElementById('connectionBox');
+    box.style.background = '#DBEAFE';
+    box.style.color = '#1E40AF';
+    box.innerHTML = '<span style="font-size:18px;">⏳</span><span>Testing connection…</span>';
 
     const result = await DataStore.testConnection();
-    status.className = result.ok ? 'sync-status success' : 'sync-status error';
-    status.textContent = result.message;
+
+    if (result.ok) {
+        box.style.background = '#D1FAE5';
+        box.style.color = '#065F46';
+        box.innerHTML = `<span style="font-size:18px;">✅</span><span>${result.message}</span>`;
+    } else {
+        box.style.background = '#FEE2E2';
+        box.style.color = '#991B1B';
+        box.innerHTML = `<span style="font-size:18px;">❌</span><span>${result.message}</span>`;
+    }
 }
 
 async function showHistory() {

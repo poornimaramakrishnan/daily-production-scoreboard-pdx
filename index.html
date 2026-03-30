@@ -33,13 +33,13 @@
                 </div>
             </div>
             <div class="toolbar-right">
-                <span class="save-indicator" id="saveIndicator" title="Auto-saves locally & to GitHub">
+                <span class="save-indicator" id="saveIndicator" title="Auto-saves locally & to cloud">
                     <span class="save-dot"></span> Saved
                 </span>
                 <button class="btn-action" onclick="showHistory()" title="View Past Scorecards">📅 History</button>
                 <button class="btn-action" onclick="showDownloads()" title="Download Templates">⬇️ Download</button>
                 <button class="btn-action btn-primary" onclick="window.print()" title="Print">🖨️ Print</button>
-                <button class="btn-action" onclick="showSettings()" title="GitHub Sync">⚙️</button>
+                <button class="btn-action" onclick="showSettings()" title="Cloud Sync">⚙️</button>
             </div>
         </div>
     </div>
@@ -82,30 +82,29 @@
     <div class="modal-overlay no-print" id="settingsModal" style="display:none;">
         <div class="modal">
             <div class="modal-header">
-                <h3>⚙️ GitHub Sync Settings</h3>
+                <h3>⚙️ Cloud Sync Settings</h3>
                 <button class="modal-close" onclick="closeModal('settingsModal')">✕</button>
             </div>
             <div class="modal-body">
-                <p class="modal-desc">Connect to a GitHub repo to persist your daily scorecards as JSON files.<br>
-                Each day is saved as <code>data/YYYY-MM-DD.json</code> with timestamps.</p>
-                <div class="form-group">
-                    <label>GitHub Personal Access Token</label>
-                    <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" class="form-input">
-                    <small>Needs <code>repo</code> scope · <a href="https://github.com/settings/tokens/new?scopes=repo&description=DailyScoreboard" target="_blank" rel="noopener">Create token →</a></small>
+                <p class="modal-desc">Your scorecards auto-save to the cloud via a secure proxy.<br>
+                No tokens or passwords needed — it just works! 🎉</p>
+                <div id="connectionBox" style="padding:14px; border-radius:8px; background:#D1FAE5; color:#065F46; font-size:13px; display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+                    <span style="font-size:18px;">☁️</span>
+                    <span>Checking connection…</span>
                 </div>
-                <div class="form-group">
-                    <label>Repository <small>(owner/repo)</small></label>
-                    <input type="text" id="ghRepo" placeholder="mattandrews/daily-scoreboard-data" class="form-input">
-                </div>
-                <div class="form-group">
-                    <label>Branch</label>
-                    <input type="text" id="ghBranch" value="main" class="form-input">
-                </div>
+                <details style="margin-top:8px;">
+                    <summary style="font-size:11px; color:#999; cursor:pointer;">Advanced: Custom Worker URL</summary>
+                    <div class="form-group" style="margin-top:8px;">
+                        <label>Worker URL</label>
+                        <input type="text" id="workerUrl" placeholder="https://scoreboard-api.your-account.workers.dev" class="form-input">
+                        <small>Only change if you self-host the Cloudflare Worker</small>
+                    </div>
+                </details>
                 <div class="sync-status" id="syncStatus"></div>
             </div>
             <div class="modal-footer">
-                <button class="btn-action" onclick="testGitHubConnection()">🔗 Test Connection</button>
-                <button class="btn-action btn-primary" onclick="saveSettings()">💾 Save Settings</button>
+                <button class="btn-action" onclick="testCloudConnection()">🔗 Test Connection</button>
+                <button class="btn-action btn-primary" onclick="saveSettings()">💾 Save</button>
             </div>
         </div>
     </div>

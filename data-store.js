@@ -1,16 +1,23 @@
 /* ============================================================
    DATA-STORE.JS — JSON Persistence Layer
-   Saves scoreboard data locally (localStorage) + GitHub API
+   Saves scoreboard data locally (localStorage) + Cloudflare Worker proxy
    Each day = one JSON file: data/YYYY-MM-DD.json
+   The GitHub token is stored securely in the Cloudflare Worker.
+   No secrets are ever exposed to the browser.
    ============================================================ */
 
 const DataStore = (() => {
     const LOCAL_PREFIX = 'scoreboard_';
     const SETTINGS_KEY = 'scoreboard_settings';
+
+    // ★ Cloudflare Worker — secure proxy (token lives server-side, never in browser)
+    const WORKER_URL = localStorage.getItem('scoreboard_worker_url')
+        || 'https://scoreboard-api.poornima2489.workers.dev';
+
     let saveTimeout = null;
     let currentDate = null;
 
-    // ─── Settings ───
+    // ─── Settings (simplified — no token needed) ───
     function getSettings() {
         try {
             return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {};
@@ -19,6 +26,10 @@ const DataStore = (() => {
 
     function saveSettingsToStorage(settings) {
         localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+        // If a custom worker URL was provided, persist it
+        if (settings.workerUrl) {
+            localStorage.setItem('scoreboard_worker_url', settings.workerUrl);
+        }
     }
 
     // ─── Date Utilities ───
@@ -117,110 +128,64 @@ const DataStore = (() => {
         return dates.sort().reverse();
     }
 
-    // ─── GitHub API ───
-    async function ghRequest(method, path, body = null) {
-        const settings = getSettings();
-        if (!settings.token || !settings.repo) return null;
+    // ─── Cloudflare Worker Proxy API ───
+    function getWorkerUrl() {
+        return localStorage.getItem('scoreboard_worker_url')
+            || 'https://scoreboard-api.poornimaramakrishnan.workers.dev';
+    }
 
-        const url = `https://api.github.com/repos/${settings.repo}/contents/${path}`;
-        const headers = {
-            'Authorization': `token ${settings.token}`,
-            'Accept': 'application/vnd.github.v3+json',
-            'Content-Type': 'application/json'
-        };
-
-        const opts = { method, headers };
-        if (body) opts.body = JSON.stringify(body);
-
+    async function loadFromCloud(dateStr) {
         try {
-            const resp = await fetch(url, opts);
-            if (resp.status === 404) return { notFound: true };
+            const resp = await fetch(`${getWorkerUrl()}/load/${dateStr}`);
+            if (resp.status === 404) return null;
             if (!resp.ok) {
-                const err = await resp.json().catch(() => ({}));
-                console.error('GitHub API error:', resp.status, err);
-                return { error: true, status: resp.status, message: err.message };
+                console.warn('Cloud load error:', resp.status);
+                return null;
             }
             return await resp.json();
         } catch (e) {
-            console.error('GitHub API network error:', e);
-            return { error: true, message: e.message };
-        }
-    }
-
-    async function loadFromGitHub(dateStr) {
-        const path = `data/${dateStr}.json`;
-        const settings = getSettings();
-        if (!settings.token || !settings.repo) return null;
-
-        const result = await ghRequest('GET', path + `?ref=${settings.branch || 'main'}`);
-        if (!result || result.notFound || result.error) return null;
-
-        try {
-            const content = atob(result.content);
-            return JSON.parse(content);
-        } catch (e) {
-            console.warn('Failed to parse GitHub data:', e);
+            console.warn('Cloud load network error:', e);
             return null;
         }
     }
 
-    async function saveToGitHub(dateStr, data) {
-        const settings = getSettings();
-        if (!settings.token || !settings.repo) return false;
-
-        const path = `data/${dateStr}.json`;
-        const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-        
-        // Check if file exists (need sha for updates)
-        const existing = await ghRequest('GET', path + `?ref=${settings.branch || 'main'}`);
-        
-        const body = {
-            message: `Update scorecard: ${dateStr} at ${new Date().toLocaleTimeString()}`,
-            content: content,
-            branch: settings.branch || 'main'
-        };
-
-        if (existing && !existing.notFound && !existing.error && existing.sha) {
-            body.sha = existing.sha; // Required for file updates
+    async function saveToCloud(dateStr, data) {
+        try {
+            const resp = await fetch(`${getWorkerUrl()}/save/${dateStr}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if (resp.ok) return true;
+            const err = await resp.json().catch(() => ({}));
+            console.error('Cloud save error:', err);
+            return false;
+        } catch (e) {
+            console.error('Cloud save network error:', e);
+            return false;
         }
-
-        const result = await ghRequest('PUT', path, body);
-        return result && !result.error;
     }
 
-    async function listGitHubFiles() {
-        const settings = getSettings();
-        if (!settings.token || !settings.repo) return [];
-
-        const result = await ghRequest('GET', `data?ref=${settings.branch || 'main'}`);
-        if (!result || result.notFound || result.error || !Array.isArray(result)) return [];
-
-        return result
-            .filter(f => f.name.endsWith('.json'))
-            .map(f => f.name.replace('.json', ''))
-            .sort()
-            .reverse();
+    async function listCloudFiles() {
+        try {
+            const resp = await fetch(`${getWorkerUrl()}/list`);
+            if (!resp.ok) return [];
+            const result = await resp.json();
+            return result.dates || [];
+        } catch (e) {
+            console.warn('Cloud list error:', e);
+            return [];
+        }
     }
 
     async function testConnection() {
-        const settings = getSettings();
-        if (!settings.token || !settings.repo) {
-            return { ok: false, message: 'Token and repo are required.' };
-        }
-
         try {
-            const url = `https://api.github.com/repos/${settings.repo}`;
-            const resp = await fetch(url, {
-                headers: {
-                    'Authorization': `token ${settings.token}`,
-                    'Accept': 'application/vnd.github.v3+json'
-                }
-            });
+            const resp = await fetch(`${getWorkerUrl()}/health`);
             if (resp.ok) {
-                const repo = await resp.json();
-                return { ok: true, message: `Connected to ${repo.full_name} ✓` };
+                const data = await resp.json();
+                return { ok: true, message: `Connected to ${data.repo} ✓` };
             } else {
-                return { ok: false, message: `Error ${resp.status}: Check token and repo name.` };
+                return { ok: false, message: `Worker returned ${resp.status}` };
             }
         } catch (e) {
             return { ok: false, message: `Network error: ${e.message}` };
@@ -232,17 +197,18 @@ const DataStore = (() => {
         // 1. Try local first (instant)
         let data = loadLocal(dateStr);
         
-        // 2. Try GitHub in background
-        const settings = getSettings();
-        if (settings.token && settings.repo) {
-            const ghData = await loadFromGitHub(dateStr);
-            if (ghData) {
+        // 2. Try Cloudflare Worker (cloud) in background
+        try {
+            const cloudData = await loadFromCloud(dateStr);
+            if (cloudData) {
                 // Use whichever is newer
-                if (!data || new Date(ghData.last_updated) > new Date(data.last_updated)) {
-                    data = ghData;
+                if (!data || new Date(cloudData.last_updated) > new Date(data.last_updated)) {
+                    data = cloudData;
                     saveLocal(dateStr, data); // Cache locally
                 }
             }
+        } catch (e) {
+            console.warn('Cloud load failed, using local data:', e);
         }
 
         // 3. Return data or empty template
@@ -254,16 +220,11 @@ const DataStore = (() => {
         saveLocal(dateStr, data);
         updateSaveIndicator('saving');
 
-        // Debounce GitHub save (wait 1.5s after last edit)
+        // Debounce cloud save (wait 1.5s after last edit)
         if (saveTimeout) clearTimeout(saveTimeout);
         saveTimeout = setTimeout(async () => {
-            const settings = getSettings();
-            if (settings.token && settings.repo) {
-                const success = await saveToGitHub(dateStr, data);
-                updateSaveIndicator(success ? 'saved' : 'error');
-            } else {
-                updateSaveIndicator('local');
-            }
+            const success = await saveToCloud(dateStr, data);
+            updateSaveIndicator(success ? 'saved' : 'error');
         }, 1500);
     }
 
@@ -285,16 +246,17 @@ const DataStore = (() => {
         }
     }
 
-    // ─── List all saved dates (merged local + GitHub) ───
+    // ─── List all saved dates (merged local + cloud) ───
     async function listAllDates() {
         const localDates = listLocalDates();
-        const settings = getSettings();
-        let ghDates = [];
-        if (settings.token && settings.repo) {
-            ghDates = await listGitHubFiles();
+        let cloudDates = [];
+        try {
+            cloudDates = await listCloudFiles();
+        } catch (e) {
+            console.warn('Cloud list failed:', e);
         }
         // Merge and deduplicate
-        const all = [...new Set([...localDates, ...ghDates])];
+        const all = [...new Set([...localDates, ...cloudDates])];
         return all.sort().reverse();
     }
 
