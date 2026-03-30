@@ -315,9 +315,9 @@ body {
 .th-hint { font-weight: 400; font-size: 6px; color: var(--slate); }
 .col-num { width: 4.5%; }
 .col-name { width: 28%; text-align: left !important; }
-.col-tier { width: 10%; }
+.col-tier { width: 13%; }
 .col-result { width: 26%; }
-.col-next { width: 31.5%; text-align: left !important; }
+.col-next { width: 28.5%; text-align: left !important; }
 
 .call-table td {
     padding: 1px 4px; height: var(--row-height);
@@ -517,9 +517,9 @@ body {
 }
 .min-col-num { width: 4%; }
 .min-col-name { width: 28%; }
-.min-col-tier { width: 8%; text-align: center !important; }
+.min-col-tier { width: 12%; text-align: center !important; }
 .min-col-result { width: 24%; text-align: center !important; }
-.min-col-next { width: 36%; }
+.min-col-next { width: 32%; }
 .min-call-table td {
     padding: 1px 4px; height: var(--row-height-min);
     border-bottom: 1px solid var(--min-gray-100);
