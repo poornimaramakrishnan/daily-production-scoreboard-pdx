@@ -329,11 +329,61 @@ body {
 .call-table .row-num { text-align: center; color: var(--med-gray); font-size: 7px; font-weight: 500; }
 .call-table .tier-codes {
     text-align: center; color: #C0C0C0; font-size: 7px; letter-spacing: 1.5px;
-    cursor: pointer; user-select: none;
+    cursor: pointer; user-select: none; padding: 0 2px;
 }
 .call-table .result-codes {
     text-align: center; color: #C8C8C8; font-size: 6.5px; letter-spacing: 0.3px;
-    cursor: pointer; user-select: none;
+    cursor: pointer; user-select: none; padding: 0 1px;
+}
+
+/* Clickable code pills (Tier & Result) */
+.code-pill {
+    display: inline-block;
+    padding: 0px 3px;
+    margin: 0 1px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    font-size: 7px;
+    font-weight: 500;
+    color: #BABABA;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+    line-height: 1.4;
+    vertical-align: middle;
+}
+.code-pill:hover {
+    border-color: var(--slate);
+    color: var(--slate);
+    background: rgba(61, 90, 128, 0.06);
+}
+.code-pill.selected {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+    font-weight: 700;
+}
+
+/* Minimal design pills */
+.min-pill-code {
+    font-size: 6.5px;
+    padding: 0px 2.5px;
+    margin: 0 0.5px;
+    border-radius: 2px;
+    color: #C0C0C0;
+}
+.min-pill-code:hover {
+    border-color: #1A1A1A;
+    color: #1A1A1A;
+    background: rgba(0, 0, 0, 0.04);
+}
+.min-pill-code.selected {
+    background: #1A1A1A;
+    color: white;
+    border-color: #1A1A1A;
+}
+.min-tier-codes, .min-result-codes {
+    text-align: center; padding: 0 1px;
 }
 
 .time-ref {
@@ -557,6 +607,11 @@ body {
     [contenteditable]:focus {
         background: transparent !important;
     }
+
+    /* Code pills: only show selected ones when printing */
+    .code-pill:not(.selected) { color: #DDDDDD !important; border-color: transparent !important; }
+    .code-pill.selected { background: #1B2A4A !important; color: white !important; border-color: #1B2A4A !important; }
+    .min-pill-code.selected { background: #1A1A1A !important; color: white !important; border-color: #1A1A1A !important; }
     
     /* Ensure footer stays at bottom */
     .accent-bar.bottom { margin-top: auto; }

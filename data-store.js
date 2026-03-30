@@ -254,7 +254,7 @@ const DataStore = (() => {
         saveLocal(dateStr, data);
         updateSaveIndicator('saving');
 
-        // Debounce GitHub save (wait 2s after last edit)
+        // Debounce GitHub save (wait 1.5s after last edit)
         if (saveTimeout) clearTimeout(saveTimeout);
         saveTimeout = setTimeout(async () => {
             const settings = getSettings();
@@ -262,9 +262,9 @@ const DataStore = (() => {
                 const success = await saveToGitHub(dateStr, data);
                 updateSaveIndicator(success ? 'saved' : 'error');
             } else {
-                updateSaveIndicator('saved');
+                updateSaveIndicator('local');
             }
-        }, 2000);
+        }, 1500);
     }
 
     function updateSaveIndicator(state) {
@@ -278,8 +278,10 @@ const DataStore = (() => {
         } else if (state === 'error') {
             el.classList.add('error');
             el.innerHTML = '<span class="save-dot"></span> Sync Error';
+        } else if (state === 'local') {
+            el.innerHTML = '<span class="save-dot"></span> Saved locally';
         } else {
-            el.innerHTML = '<span class="save-dot"></span> Saved';
+            el.innerHTML = '<span class="save-dot"></span> Saved ✓';
         }
     }
 

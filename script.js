@@ -57,16 +57,38 @@ function generateCallLog(tbodyId, style) {
             tr.innerHTML = `
                 <td class="row-num">${i + 1}</td>
                 <td contenteditable="true" data-field="call_name" data-row="${i}"></td>
-                <td class="tier-codes" data-field="call_tier" data-row="${i}">T1 T2 T3</td>
-                <td class="result-codes" data-field="call_result" data-row="${i}">S &nbsp;VM &nbsp;A &nbsp;NA &nbsp;B &nbsp;CB</td>
+                <td class="tier-codes">
+                    <span class="code-pill clickable" data-field="call_tier" data-row="${i}" data-value="T1">T1</span>
+                    <span class="code-pill clickable" data-field="call_tier" data-row="${i}" data-value="T2">T2</span>
+                    <span class="code-pill clickable" data-field="call_tier" data-row="${i}" data-value="T3">T3</span>
+                </td>
+                <td class="result-codes">
+                    <span class="code-pill clickable" data-field="call_result" data-row="${i}" data-value="S">S</span>
+                    <span class="code-pill clickable" data-field="call_result" data-row="${i}" data-value="VM">VM</span>
+                    <span class="code-pill clickable" data-field="call_result" data-row="${i}" data-value="A">A</span>
+                    <span class="code-pill clickable" data-field="call_result" data-row="${i}" data-value="NA">NA</span>
+                    <span class="code-pill clickable" data-field="call_result" data-row="${i}" data-value="B">B</span>
+                    <span class="code-pill clickable" data-field="call_result" data-row="${i}" data-value="CB">CB</span>
+                </td>
                 <td contenteditable="true" data-field="call_next" data-row="${i}"></td>
             `;
         } else {
             tr.innerHTML = `
                 <td style="text-align:center;color:#A0A0A0;font-size:7px;">${i + 1}</td>
                 <td contenteditable="true" data-field="call_name" data-row="${i}"></td>
-                <td style="text-align:center;color:#C0C0C0;font-size:7px;" data-field="call_tier" data-row="${i}">1 · 2 · 3</td>
-                <td style="text-align:center;color:#C0C0C0;font-size:7px;" data-field="call_result" data-row="${i}">S VM A NA B CB</td>
+                <td class="tier-codes min-tier-codes">
+                    <span class="code-pill min-pill-code clickable" data-field="call_tier" data-row="${i}" data-value="T1">1</span>
+                    <span class="code-pill min-pill-code clickable" data-field="call_tier" data-row="${i}" data-value="T2">2</span>
+                    <span class="code-pill min-pill-code clickable" data-field="call_tier" data-row="${i}" data-value="T3">3</span>
+                </td>
+                <td class="result-codes min-result-codes">
+                    <span class="code-pill min-pill-code clickable" data-field="call_result" data-row="${i}" data-value="S">S</span>
+                    <span class="code-pill min-pill-code clickable" data-field="call_result" data-row="${i}" data-value="VM">VM</span>
+                    <span class="code-pill min-pill-code clickable" data-field="call_result" data-row="${i}" data-value="A">A</span>
+                    <span class="code-pill min-pill-code clickable" data-field="call_result" data-row="${i}" data-value="NA">NA</span>
+                    <span class="code-pill min-pill-code clickable" data-field="call_result" data-row="${i}" data-value="B">B</span>
+                    <span class="code-pill min-pill-code clickable" data-field="call_result" data-row="${i}" data-value="CB">CB</span>
+                </td>
                 <td contenteditable="true" data-field="call_next" data-row="${i}"></td>
             `;
         }
@@ -162,7 +184,16 @@ function populateDesign(design) {
         const nextEl = container.querySelector(`[data-field="call_next"][data-row="${i}"]`);
         if (nameEl) nameEl.textContent = row.name || '';
         if (nextEl) nextEl.textContent = row.next_step || '';
-        // Tier and result are shown as clickable codes — highlight if selected
+
+        // Highlight saved tier selection
+        container.querySelectorAll(`[data-field="call_tier"][data-row="${i}"].code-pill`).forEach(p => {
+            p.classList.toggle('selected', row.tier === p.dataset.value);
+        });
+
+        // Highlight saved result selection
+        container.querySelectorAll(`[data-field="call_result"][data-row="${i}"].code-pill`).forEach(p => {
+            p.classList.toggle('selected', row.result === p.dataset.value);
+        });
     }
 
     // Follow-ups
@@ -191,20 +222,62 @@ function setupClickableElements() {
     document.addEventListener('click', (e) => {
         const el = e.target;
 
-        // Target circles (1-5)
+        // Target circles (1-5) — single select (radio behavior)
         if (el.classList.contains('clickable') && el.dataset.target) {
             const val = el.dataset.target;
-            if (!currentData.targets_checked) currentData.targets_checked = [];
-            const idx = currentData.targets_checked.indexOf(val);
-            if (idx >= 0) {
-                currentData.targets_checked.splice(idx, 1);
-            } else {
-                currentData.targets_checked.push(val);
+            const wasChecked = (currentData.targets_checked || []).includes(val);
+
+            // Clear all targets first (single select)
+            currentData.targets_checked = [];
+            document.querySelectorAll('[data-target]').forEach(c => c.classList.remove('checked'));
+
+            // If it wasn't already checked, select it
+            if (!wasChecked) {
+                currentData.targets_checked = [val];
+                document.querySelectorAll(`[data-target="${val}"]`).forEach(c => c.classList.add('checked'));
             }
-            // Update all matching circles in both designs
-            document.querySelectorAll(`[data-target="${val}"]`).forEach(c => {
-                c.classList.toggle('checked', currentData.targets_checked.includes(val));
+            triggerSave();
+        }
+
+        // Tier pills (T1/T2/T3) — single select per row
+        if (el.classList.contains('code-pill') && el.dataset.field === 'call_tier') {
+            const row = parseInt(el.dataset.row);
+            const val = el.dataset.value;
+            if (!currentData.call_log[row]) return;
+
+            const wasSelected = currentData.call_log[row].tier === val;
+            currentData.call_log[row].tier = wasSelected ? '' : val;
+
+            // Clear all tier pills in this row across both designs, then highlight selected
+            document.querySelectorAll(`[data-field="call_tier"][data-row="${row}"]`).forEach(p => {
+                if (p.classList.contains('code-pill')) p.classList.remove('selected');
             });
+            if (!wasSelected) {
+                document.querySelectorAll(`[data-field="call_tier"][data-row="${row}"][data-value="${val}"]`).forEach(p => {
+                    p.classList.add('selected');
+                });
+            }
+            triggerSave();
+        }
+
+        // Result pills (S/VM/A/NA/B/CB) — single select per row
+        if (el.classList.contains('code-pill') && el.dataset.field === 'call_result') {
+            const row = parseInt(el.dataset.row);
+            const val = el.dataset.value;
+            if (!currentData.call_log[row]) return;
+
+            const wasSelected = currentData.call_log[row].result === val;
+            currentData.call_log[row].result = wasSelected ? '' : val;
+
+            // Clear all result pills in this row across both designs, then highlight selected
+            document.querySelectorAll(`[data-field="call_result"][data-row="${row}"]`).forEach(p => {
+                if (p.classList.contains('code-pill')) p.classList.remove('selected');
+            });
+            if (!wasSelected) {
+                document.querySelectorAll(`[data-field="call_result"][data-row="${row}"][data-value="${val}"]`).forEach(p => {
+                    p.classList.add('selected');
+                });
+            }
             triggerSave();
         }
 
