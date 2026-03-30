@@ -1,4 +1,155 @@
 {
   "date": "2026-03-30",
-  "test": true
+  "last_updated": "2026-03-30T21:02:44.687Z",
+  "created": "2026-03-30T17:59:21.792Z",
+  "design": "executive",
+  "display_date": "Mar 30, 2026",
+  "day_of_week": "Fri",
+  "targets_checked": [
+    "5"
+  ],
+  "calls_made": "",
+  "appts_set": "",
+  "followups_sched": "",
+  "hit_target": "yes",
+  "why_not": "",
+  "call_log": [
+    {
+      "name": "Sample Log 1",
+      "tier": "T3",
+      "result": "CB",
+      "next_step": ""
+    },
+    {
+      "name": "Sample Log 2",
+      "tier": "T1",
+      "result": "NA",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    }
+  ],
+  "followups": [
+    {
+      "name": "",
+      "why": ""
+    },
+    {
+      "name": "",
+      "why": ""
+    },
+    {
+      "name": "",
+      "why": ""
+    },
+    {
+      "name": "",
+      "why": ""
+    },
+    {
+      "name": "",
+      "why": ""
+    }
+  ],
+  "appointments": [
+    {
+      "name": "",
+      "details": ""
+    },
+    {
+      "name": "",
+      "details": ""
+    },
+    {
+      "name": "",
+      "details": ""
+    },
+    {
+      "name": "",
+      "details": ""
+    },
+    {
+      "name": "",
+      "details": ""
+    }
+  ],
+  "review_worked": "",
+  "review_didnt_work": "",
+  "review_improve": ""
 }
