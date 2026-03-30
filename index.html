@@ -37,8 +37,41 @@
                     <span class="save-dot"></span> Saved
                 </span>
                 <button class="btn-action" onclick="showHistory()" title="View Past Scorecards">📅 History</button>
+                <button class="btn-action" onclick="showDownloads()" title="Download Templates">⬇️ Download</button>
                 <button class="btn-action btn-primary" onclick="window.print()" title="Print">🖨️ Print</button>
                 <button class="btn-action" onclick="showSettings()" title="GitHub Sync">⚙️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- DOWNLOADS MODAL -->
+    <!-- ============================================ -->
+    <div class="modal-overlay no-print" id="downloadsModal" style="display:none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>⬇️ Download Templates</h3>
+                <button class="modal-close" onclick="closeModal('downloadsModal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">Blank templates ready to print — no date or varying content, just the clean form.</p>
+                <div class="download-grid">
+                    <a href="Daily_Production_Scoreboard_Template_A.pdf" class="download-card" download>
+                        <span class="download-icon">🏛️</span>
+                        <strong>Executive Classic (PDF)</strong>
+                        <small>Navy &amp; Gold · US Letter</small>
+                    </a>
+                    <a href="Daily_Production_Scoreboard_Template_B.pdf" class="download-card" download>
+                        <span class="download-icon">◻️</span>
+                        <strong>Modern Minimal (PDF)</strong>
+                        <small>Black &amp; White · US Letter</small>
+                    </a>
+                    <a href="Daily_Production_Scoreboard_v2.xlsx" class="download-card" download>
+                        <span class="download-icon">📊</span>
+                        <strong>Excel Template (.xlsx)</strong>
+                        <small>Opens in Numbers / Pages</small>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

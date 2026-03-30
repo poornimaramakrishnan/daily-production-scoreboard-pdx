@@ -308,6 +308,10 @@ function switchDesign(design) {
 }
 
 // ─── MODALS ───
+function showDownloads() {
+    document.getElementById('downloadsModal').style.display = 'flex';
+}
+
 function showSettings() {
     const settings = DataStore.getSettings();
     document.getElementById('ghToken').value = settings.token || '';

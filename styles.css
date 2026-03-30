@@ -120,6 +120,20 @@ body {
 .modal-footer .btn-action { color: var(--navy); border-color: #CCC; }
 .modal-footer .btn-primary { color: white; background: var(--navy); border-color: var(--navy); }
 .modal-desc { font-size: 13px; color: #666; margin-bottom: 16px; line-height: 1.5; }
+.download-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.download-card {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 18px 12px; border: 1.5px solid #DDD; border-radius: 10px;
+    text-decoration: none; color: var(--navy); text-align: center;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    cursor: pointer;
+}
+.download-card:hover {
+    border-color: var(--gold); box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform: translateY(-2px);
+}
+.download-icon { font-size: 28px; margin-bottom: 4px; }
+.download-card strong { font-size: 12px; }
+.download-card small { font-size: 11px; color: #999; }
 .form-group { margin-bottom: 14px; }
 .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
 .form-group small { font-size: 11px; color: #999; margin-top: 3px; display: block; }
