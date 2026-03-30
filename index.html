@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Production Scoreboard — Matthew Andrews</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- DESIGN SWITCHER (Screen only) -->
+    <!-- ============================================ -->
+    <div class="switcher no-print">
+        <div class="switcher-inner">
+            <h2>Daily Production Scoreboard — Design Preview</h2>
+            <p class="switcher-subtitle">For Matthew Andrews, Principal Broker</p>
+            <div class="switcher-buttons">
+                <button class="btn-design active" data-design="executive" onclick="switchDesign('executive')">
+                    <span class="btn-icon">🏛️</span>
+                    <span class="btn-label">Design A</span>
+                    <span class="btn-desc">Executive Classic</span>
+                </button>
+                <button class="btn-design" data-design="minimal" onclick="switchDesign('minimal')">
+                    <span class="btn-icon">◻️</span>
+                    <span class="btn-label">Design B</span>
+                    <span class="btn-desc">Modern Minimal</span>
+                </button>
+            </div>
+            <div class="switcher-actions">
+                <button class="btn-print" onclick="window.print()">
+                    🖨️ Print This Design
+                </button>
+                <a class="btn-download" href="Daily_Production_Scoreboard_v1.xlsx" download>
+                    📥 Download Excel
+                </a>
+            </div>
+            <p class="switcher-note">Both designs are optimized for US Letter (8.5" × 11") printing with pen-friendly row heights.</p>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- DESIGN A: EXECUTIVE CLASSIC -->
+    <!-- ============================================ -->
+    <div class="page executive-design" id="design-executive">
+        <!-- Gold accent bar -->
+        <div class="accent-bar"></div>
+        
+        <!-- Header -->
+        <header class="page-header">
+            <div class="header-left">
+                <h1 class="page-title">DAILY PRODUCTION<br>SCOREBOARD</h1>
+                <p class="header-meta">Matthew Andrews · Principal Broker · (503) 290-6958</p>
+            </div>
+            <div class="header-right">
+                <div class="date-field">
+                    <label>DATE</label>
+                    <div class="write-line date-line"></div>
+                </div>
+                <div class="day-selector">
+                    <span class="day-circle">M</span>
+                    <span class="day-circle">T</span>
+                    <span class="day-circle">W</span>
+                    <span class="day-circle">Th</span>
+                    <span class="day-circle">F</span>
+                    <span class="day-circle">S</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="accent-line"></div>
+
+        <!-- TARGET 5 - Progress Tracker -->
+        <section class="target-zone">
+            <div class="target-header">
+                <span class="target-label">TARGET 5</span>
+                <span class="target-desc">— REAL CONVERSATIONS TODAY</span>
+            </div>
+            <div class="target-content">
+                <div class="target-circles">
+                    <div class="circle-group">
+                        <div class="target-circle">1</div>
+                        <div class="target-circle">2</div>
+                        <div class="target-circle">3</div>
+                        <div class="target-circle">4</div>
+                        <div class="target-circle">5</div>
+                    </div>
+                </div>
+                <div class="target-metrics">
+                    <div class="metric-box">
+                        <span class="metric-label">CALLS MADE</span>
+                        <div class="metric-value-box"></div>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">APPTS SET</span>
+                        <div class="metric-value-box"></div>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">FOLLOW-UPS</span>
+                        <div class="metric-value-box"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="target-footer">
+                <span class="hit-target">HIT TARGET?&nbsp;&nbsp;&nbsp;<span class="circle-option">YES</span>&nbsp;&nbsp;/&nbsp;&nbsp;<span class="circle-option">NO</span></span>
+                <span class="why-line">If not, why: <span class="write-line-inline"></span></span>
+            </div>
+        </section>
+
+        <div class="accent-line thin"></div>
+
+        <!-- CALL LOG -->
+        <section class="call-log">
+            <div class="section-header navy">
+                <span class="section-icon">📞</span>
+                CALL LOG
+                <span class="section-legend">S = Spoke &nbsp; VM = Voicemail &nbsp; A = Appt &nbsp; NA = No Answer &nbsp; B = Bad # &nbsp; CB = Callback</span>
+            </div>
+            <table class="call-table">
+                <thead>
+                    <tr>
+                        <th class="col-num">#</th>
+                        <th class="col-name">NAME</th>
+                        <th class="col-tier">TIER</th>
+                        <th class="col-result">RESULT <span class="th-hint">(circle)</span></th>
+                        <th class="col-next">NEXT STEP</th>
+                    </tr>
+                </thead>
+                <tbody id="call-log-body">
+                    <!-- Generated by JS -->
+                </tbody>
+            </table>
+            
+            <!-- Tier Reference Sidebar -->
+            <div class="tier-reference">
+                <div class="tier-ref-title">TIER REFERENCE</div>
+                <div class="tier-item tier-1">
+                    <span class="tier-badge t1">T1</span>
+                    <span class="tier-info"><strong>HOT LEADS</strong> — Convert fast, highest priority</span>
+                </div>
+                <div class="tier-item tier-2">
+                    <span class="tier-badge t2">T2</span>
+                    <span class="tier-info"><strong>EASY MONEY</strong> — Quick wins, low-hanging fruit</span>
+                </div>
+                <div class="tier-item tier-3">
+                    <span class="tier-badge t3">T3</span>
+                    <span class="tier-info"><strong>FILLER</strong> — Volume calls, keep pipeline full</span>
+                </div>
+                <div class="time-block">
+                    <span class="time-icon">⏰</span>
+                    <span><strong>POWER HOUR:</strong> 1:30 – 2:30 PM</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="accent-line thin"></div>
+
+        <!-- FOLLOW-UPS + APPOINTMENTS (Side by side) -->
+        <section class="dual-section">
+            <div class="dual-left">
+                <div class="section-header slate">
+                    FOLLOW-UPS
+                </div>
+                <table class="mini-table">
+                    <thead>
+                        <tr>
+                            <th>NAME</th>
+                            <th>WHY / NOTES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="write-cell"></td><td class="write-cell"></td></tr>
+                        <tr><td class="write-cell"></td><td class="write-cell"></td></tr>
+                        <tr><td class="write-cell"></td><td class="write-cell"></td></tr>
+                        <tr><td class="write-cell"></td><td class="write-cell"></td></tr>
+                        <tr><td class="write-cell"></td><td class="write-cell"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="dual-right">
+                <div class="section-header slate">
+                    APPOINTMENTS / OPPORTUNITIES
+                </div>
+                <table class="mini-table">
+                    <thead>
+                        <tr>
+                            <th>NAME / OPPORTUNITY</th>
+                            <th>DETAILS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="write-cell"></td><td class="write-cell"></td></tr>
+                        <tr><td class="write-cell"></td><td class="write-cell"></td></tr>
+                        <tr><td class="write-cell"></td><td class="write-cell"></td></tr>
+                        <tr><td class="write-cell"></td><td class="write-cell"></td></tr>
+                        <tr><td class="write-cell"></td><td class="write-cell"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="accent-line thin"></div>
+
+        <!-- DAILY REVIEW -->
+        <section class="daily-review">
+            <div class="section-header navy">
+                <span class="section-icon">📝</span>
+                DAILY REVIEW
+            </div>
+            <div class="review-questions">
+                <div class="review-q">
+                    <label>✦ WHAT WORKED TODAY?</label>
+                    <div class="review-write-line"></div>
+                    <div class="review-write-line"></div>
+                </div>
+                <div class="review-q">
+                    <label>✦ WHAT DIDN'T WORK?</label>
+                    <div class="review-write-line"></div>
+                    <div class="review-write-line"></div>
+                </div>
+                <div class="review-q">
+                    <label>✦ WHAT WILL I IMPROVE TOMORROW?</label>
+                    <div class="review-write-line"></div>
+                    <div class="review-write-line"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="accent-bar bottom"></div>
+        <footer class="page-footer">
+            Matthew Andrews · Principal Broker · Daily Production Scoreboard · © 2026
+        </footer>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- DESIGN B: MODERN MINIMAL -->
+    <!-- ============================================ -->
+    <div class="page minimal-design" id="design-minimal" style="display:none;">
+        <!-- Minimal top border -->
+        <div class="minimal-border-top"></div>
+        
+        <!-- Header -->
+        <header class="min-header">
+            <div class="min-header-left">
+                <h1 class="min-title">Daily Production<br><span class="min-title-accent">Scoreboard</span></h1>
+            </div>
+            <div class="min-header-right">
+                <div class="min-date-row">
+                    <div class="min-date-field">
+                        <span class="min-label">DATE</span>
+                        <div class="min-input-line"></div>
+                    </div>
+                    <div class="min-day-pills">
+                        <span class="min-pill">M</span>
+                        <span class="min-pill">T</span>
+                        <span class="min-pill">W</span>
+                        <span class="min-pill">Th</span>
+                        <span class="min-pill">F</span>
+                        <span class="min-pill">S</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Target Zone - Minimal -->
+        <section class="min-target">
+            <div class="min-target-row">
+                <div class="min-target-left">
+                    <span class="min-target-label">TARGET 5</span>
+                    <div class="min-target-dots">
+                        <div class="min-dot"></div>
+                        <div class="min-dot"></div>
+                        <div class="min-dot"></div>
+                        <div class="min-dot"></div>
+                        <div class="min-dot"></div>
+                    </div>
+                </div>
+                <div class="min-target-right">
+                    <div class="min-stat"><span>CALLS</span><div class="min-stat-box"></div></div>
+                    <div class="min-stat"><span>APPTS</span><div class="min-stat-box"></div></div>
+                    <div class="min-stat"><span>FOLLOW</span><div class="min-stat-box"></div></div>
+                    <div class="min-stat"><span>HIT 5?</span><div class="min-stat-box small">Y / N</div></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="min-divider"></div>
+
+        <!-- Call Log - Minimal -->
+        <section class="min-call-log">
+            <div class="min-section-title">Call Log</div>
+            <table class="min-call-table">
+                <thead>
+                    <tr>
+                        <th class="min-col-num"></th>
+                        <th class="min-col-name">Name</th>
+                        <th class="min-col-tier">Tier</th>
+                        <th class="min-col-result">Result</th>
+                        <th class="min-col-next">Next Step</th>
+                    </tr>
+                </thead>
+                <tbody id="min-call-log-body">
+                    <!-- Generated by JS -->
+                </tbody>
+            </table>
+            
+            <div class="min-tier-ref">
+                <span class="min-ref-item"><strong>T1</strong> Hot Leads</span>
+                <span class="min-ref-sep">·</span>
+                <span class="min-ref-item"><strong>T2</strong> Easy Money</span>
+                <span class="min-ref-sep">·</span>
+                <span class="min-ref-item"><strong>T3</strong> Filler</span>
+                <span class="min-ref-sep">|</span>
+                <span class="min-ref-item">S=Spoke VM=VM A=Appt NA=NoAns B=Bad# CB=Call Back</span>
+            </div>
+        </section>
+
+        <div class="min-divider"></div>
+
+        <!-- Bottom dual section - Minimal -->
+        <section class="min-dual">
+            <div class="min-dual-left">
+                <div class="min-section-title">Follow-Ups</div>
+                <table class="min-mini-table">
+                    <thead><tr><th>Name</th><th>Why</th></tr></thead>
+                    <tbody>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="min-dual-right">
+                <div class="min-section-title">Appointments Set</div>
+                <table class="min-mini-table">
+                    <thead><tr><th>Name</th><th>Details</th></tr></thead>
+                    <tbody>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="min-divider"></div>
+
+        <!-- Daily Review - Minimal -->
+        <section class="min-review">
+            <div class="min-section-title">Daily Review</div>
+            <div class="min-review-grid">
+                <div class="min-review-item">
+                    <span class="min-review-label">What worked?</span>
+                    <div class="min-review-line"></div>
+                    <div class="min-review-line"></div>
+                </div>
+                <div class="min-review-item">
+                    <span class="min-review-label">What didn't?</span>
+                    <div class="min-review-line"></div>
+                    <div class="min-review-line"></div>
+                </div>
+                <div class="min-review-item">
+                    <span class="min-review-label">Improve tomorrow?</span>
+                    <div class="min-review-line"></div>
+                    <div class="min-review-line"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Minimal Footer -->
+        <footer class="min-footer">
+            <div class="min-border-bottom"></div>
+            <span>Matthew Andrews · Principal Broker · © 2026</span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
