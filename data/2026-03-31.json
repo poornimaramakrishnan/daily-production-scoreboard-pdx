@@ -1,0 +1,153 @@
+{
+  "date": "2026-03-31",
+  "last_updated": "2026-03-31T17:02:03.328Z",
+  "created": "2026-03-31T17:01:56.107Z",
+  "design": "executive",
+  "display_date": "Mar 31, 2026",
+  "day_of_week": "",
+  "targets_checked": [],
+  "calls_made": "",
+  "appts_set": "",
+  "followups_sched": "",
+  "hit_target": "",
+  "why_not": "",
+  "call_log": [
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
+      "next_step": ""
+    }
+  ],
+  "followups": [
+    {
+      "name": "",
+      "why": ""
+    },
+    {
+      "name": "",
+      "why": ""
+    },
+    {
+      "name": "",
+      "why": ""
+    },
+    {
+      "name": "",
+      "why": ""
+    },
+    {
+      "name": "",
+      "why": ""
+    }
+  ],
+  "appointments": [
+    {
+      "name": "",
+      "details": ""
+    },
+    {
+      "name": "",
+      "details": ""
+    },
+    {
+      "name": "",
+      "details": ""
+    },
+    {
+      "name": "",
+      "details": ""
+    },
+    {
+      "name": "",
+      "details": ""
+    }
+  ],
+  "review_worked": "",
+  "review_didnt_work": "",
+  "review_improve": ""
+}
