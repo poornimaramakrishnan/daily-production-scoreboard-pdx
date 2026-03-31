@@ -1,6 +1,6 @@
 {
   "date": "2026-03-31",
-  "last_updated": "2026-03-31T22:55:13.507Z",
+  "last_updated": "2026-03-31T22:55:34.407Z",
   "created": "2026-03-31T18:48:27.119Z",
   "design": "executive",
   "display_date": "",
@@ -9,7 +9,7 @@
   "calls_made": "",
   "appts_set": "",
   "followups_sched": "",
-  "hit_target": "",
+  "hit_target": "yes",
   "why_not": "",
   "call_log": [
     {
