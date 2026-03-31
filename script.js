@@ -152,7 +152,8 @@ function populateDesign(design) {
 
     // Simple fields
     ['calls_made', 'appts_set', 'followups_sched', 'why_not',
-     'review_worked', 'review_didnt_work', 'review_improve', 'display_date'
+     'review_worked', 'review_didnt_work', 'review_improve', 'display_date',
+     'appts_set_count', 'opps_created_count'
     ].forEach(field => {
         container.querySelectorAll(`[data-field="${field}"]`).forEach(el => {
             if (el.getAttribute('contenteditable') === 'true') {
@@ -191,6 +192,15 @@ function populateDesign(design) {
         container.querySelectorAll(`[data-field="call_result"][data-row="${i}"].code-pill`).forEach(p => {
             p.classList.toggle('selected', row.result === p.dataset.value);
         });
+
+        // Apply tier-based row shading
+        const tr = container.querySelector(`tr[data-row-index="${i}"]`);
+        if (tr) {
+            tr.classList.remove('tier-t1', 'tier-t2', 'tier-t3');
+            if (row.tier === 'T1') tr.classList.add('tier-t1');
+            else if (row.tier === 'T2') tr.classList.add('tier-t2');
+            else if (row.tier === 'T3') tr.classList.add('tier-t3');
+        }
     }
 
     // Follow-ups
@@ -254,6 +264,9 @@ function setupClickableElements() {
                     p.classList.add('selected');
                 });
             }
+
+            // Apply tier-based row shading
+            applyTierShading(row, wasSelected ? '' : val);
             triggerSave();
         }
 
@@ -338,6 +351,17 @@ function setupContentEditableListeners() {
         }
 
         triggerSave();
+    });
+}
+
+// ─── TIER-BASED ROW SHADING ───
+function applyTierShading(rowIndex, tierValue) {
+    // Find all table rows with this row index across both designs
+    document.querySelectorAll(`tr[data-row-index="${rowIndex}"]`).forEach(tr => {
+        tr.classList.remove('tier-t1', 'tier-t2', 'tier-t3');
+        if (tierValue === 'T1') tr.classList.add('tier-t1');
+        else if (tierValue === 'T2') tr.classList.add('tier-t2');
+        else if (tierValue === 'T3') tr.classList.add('tier-t3');
     });
 }
 

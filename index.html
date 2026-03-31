@@ -210,8 +210,6 @@
                 <div class="section-header navy">
                     <span class="section-icon">📞</span> CALL LOG
                     <div class="header-right-info">
-                        <span class="tier-inline"><span class="tier-pip t1">T1</span>Hot Leads <span class="tier-pip t2">T2</span>Easy Money <span class="tier-pip t3">T3</span>Filler Calls</span>
-                        <span class="legend-sep">│</span>
                         <span class="section-legend">S=Spoke VM=Voicemail A=Appt NA=No Answer B=Bad# CB=Callback</span>
                     </div>
                 </div>
@@ -232,6 +230,31 @@
                 </div>
             </section>
 
+            <!-- TIER REFERENCE KEY -->
+            <div class="tier-reference-key">
+                <div class="tier-ref-title">TIER REFERENCE</div>
+                <div class="tier-ref-items">
+                    <div class="tier-ref-item">
+                        <span class="tier-ref-badge t1">T1</span>
+                        <div class="tier-ref-text">
+                            <strong>Hot Leads</strong> — Active buyers/sellers, referrals, warm follow-ups. Highest conversion probability.
+                        </div>
+                    </div>
+                    <div class="tier-ref-item">
+                        <span class="tier-ref-badge t2">T2</span>
+                        <div class="tier-ref-text">
+                            <strong>Easy Money</strong> — Past clients, sphere of influence, sign calls, open house leads. Moderate effort.
+                        </div>
+                    </div>
+                    <div class="tier-ref-item">
+                        <span class="tier-ref-badge t3">T3</span>
+                        <div class="tier-ref-text">
+                            <strong>Filler Calls</strong> — Cold calls, expired/FSBO, circle prospecting. Volume-based activity.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="accent-line thin"></div>
 
             <!-- FOLLOW-UPS + APPOINTMENTS -->
@@ -244,7 +267,10 @@
                     </table>
                 </div>
                 <div class="dual-right">
-                    <div class="section-header slate compact">APPOINTMENTS / OPPORTUNITIES</div>
+                    <div class="section-header slate compact dual-header-stack">
+                        <div class="dual-header-top">APPOINTMENTS SET<span class="dual-header-count" contenteditable="true" data-field="appts_set_count"></span></div>
+                        <div class="dual-header-bottom">OPPORTUNITIES CREATED<span class="dual-header-count" contenteditable="true" data-field="opps_created_count"></span></div>
+                    </div>
                     <table class="mini-table">
                         <thead><tr><th style="width:50%">NAME / OPP.</th><th style="width:50%">DETAILS</th></tr></thead>
                         <tbody id="appt-body"></tbody>
@@ -261,12 +287,12 @@
                 </div>
                 <div class="review-questions">
                     <div class="review-q">
-                        <label>✦ WHAT WORKED TODAY?</label>
-                        <div class="review-write-area" contenteditable="true" data-field="review_worked"></div>
-                    </div>
-                    <div class="review-q">
                         <label>✦ WHAT DIDN'T WORK?</label>
                         <div class="review-write-area" contenteditable="true" data-field="review_didnt_work"></div>
+                    </div>
+                    <div class="review-q">
+                        <label>✦ WHAT WORKED TODAY?</label>
+                        <div class="review-write-area" contenteditable="true" data-field="review_worked"></div>
                     </div>
                     <div class="review-q">
                         <label>✦ WHAT WILL I IMPROVE TOMORROW?</label>
@@ -350,7 +376,7 @@
             <section class="min-call-log">
                 <div class="min-section-bar">
                     <span class="min-section-title">Call Log</span>
-                    <span class="min-section-ref"><strong>T1</strong> Hot Leads · <strong>T2</strong> Easy Money · <strong>T3</strong> Filler Calls │ S=Spoke VM=Voicemail A=Appt NA=No Answer B=Bad# CB=CB</span>
+                    <span class="min-section-ref">S=Spoke VM=Voicemail A=Appt NA=No Answer B=Bad# CB=CB</span>
                 </div>
                 <table class="min-call-table">
                     <thead>
@@ -367,6 +393,17 @@
                 <div class="min-time-ref">⏰ Power Hour: 1:30–2:30 PM │ Block 2: 9:00–10:00 AM</div>
             </section>
 
+            <!-- Tier Reference Key (Minimal) -->
+            <div class="min-tier-reference-key">
+                <div class="min-tier-ref-items">
+                    <span class="min-tier-ref-item"><strong>T1</strong> Hot Leads — Active buyers/sellers, referrals, warm follow-ups</span>
+                    <span class="min-tier-ref-sep">│</span>
+                    <span class="min-tier-ref-item"><strong>T2</strong> Easy Money — Past clients, sphere, sign calls</span>
+                    <span class="min-tier-ref-sep">│</span>
+                    <span class="min-tier-ref-item"><strong>T3</strong> Filler Calls — Cold calls, expired/FSBO, circle prospecting</span>
+                </div>
+            </div>
+
             <div class="min-divider"></div>
 
             <!-- Follow-ups + Appointments -->
@@ -379,7 +416,11 @@
                     </table>
                 </div>
                 <div class="min-dual-right">
-                    <div class="min-section-title">Appointments Set</div>
+                    <div class="min-section-title-stack">
+                        <span>Appointments Set<span class="min-count-box" contenteditable="true" data-field="appts_set_count"></span></span>
+                        <span class="min-stack-sep">/</span>
+                        <span>Opportunities Created<span class="min-count-box" contenteditable="true" data-field="opps_created_count"></span></span>
+                    </div>
                     <table class="min-mini-table">
                         <thead><tr><th>Name</th><th>Details</th></tr></thead>
                         <tbody id="min-appt-body"></tbody>
@@ -394,12 +435,12 @@
                 <div class="min-section-title">Daily Review</div>
                 <div class="min-review-grid">
                     <div class="min-review-item">
-                        <span class="min-review-label">What worked today?</span>
-                        <div class="min-review-area" contenteditable="true" data-field="review_worked"></div>
-                    </div>
-                    <div class="min-review-item">
                         <span class="min-review-label">What didn't work?</span>
                         <div class="min-review-area" contenteditable="true" data-field="review_didnt_work"></div>
+                    </div>
+                    <div class="min-review-item">
+                        <span class="min-review-label">What worked today?</span>
+                        <div class="min-review-area" contenteditable="true" data-field="review_worked"></div>
                     </div>
                     <div class="min-review-item">
                         <span class="min-review-label">What will I improve tomorrow?</span>
