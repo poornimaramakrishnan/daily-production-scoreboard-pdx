@@ -1,13 +1,11 @@
 {
   "date": "2026-03-31",
-  "last_updated": "2026-03-31T22:53:50.043Z",
+  "last_updated": "2026-03-31T22:53:53.172Z",
   "created": "2026-03-31T18:48:27.119Z",
   "design": "executive",
   "display_date": "Tuesday, March 31, 2026",
   "day_of_week": "Sun",
-  "targets_checked": [
-    "3"
-  ],
+  "targets_checked": [],
   "calls_made": "",
   "appts_set": "",
   "followups_sched": "",
