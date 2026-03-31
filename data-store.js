@@ -69,8 +69,8 @@ const DataStore = (() => {
             hit_target: '',        // "yes" or "no"
             why_not: '',
 
-            // Call Log (15 rows)
-            call_log: Array.from({ length: 15 }, (_, i) => ({
+            // Call Log (12 rows)
+            call_log: Array.from({ length: 12 }, (_, i) => ({
                 name: '',
                 tier: '',       // "T1", "T2", "T3"
                 result: '',     // "S", "VM", "A", "NA", "B", "CB"

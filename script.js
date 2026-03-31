@@ -3,7 +3,7 @@
    15-row call log · Interactive data entry · Auto-save
    ============================================================ */
 
-const NUM_CALL_ROWS = 15;
+const NUM_CALL_ROWS = 12;
 const NUM_FOLLOWUP_ROWS = 5;
 const NUM_APPT_ROWS = 5;
 
@@ -124,7 +124,7 @@ async function loadDate(dateStr) {
     populateDesign('executive');
     populateDesign('minimal');
 
-    // Auto-detect day of week
+    // Auto-detect day of week from calendar
     const date = new Date(dateStr + 'T12:00:00');
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const dayName = days[date.getDay()];
@@ -133,16 +133,13 @@ async function loadDate(dateStr) {
     document.querySelectorAll('.day-circle, .min-pill').forEach(el => {
         el.classList.toggle('active', el.dataset.day === dayName);
     });
+    currentData.day_of_week = dayName;
 
-    // Set date display
-    const displayDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    // Always set date display from calendar selection
+    const displayDate = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    currentData.display_date = displayDate;
     document.querySelectorAll('[data-field="display_date"]').forEach(el => {
-        if (!el.textContent && !currentData.display_date) {
-            el.textContent = displayDate;
-            currentData.display_date = displayDate;
-        } else if (currentData.display_date) {
-            el.textContent = currentData.display_date;
-        }
+        el.textContent = displayDate;
     });
 }
 

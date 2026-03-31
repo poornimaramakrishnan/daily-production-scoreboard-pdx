@@ -22,8 +22,8 @@
     --min-gray-100: #F5F5F5;
     --font-display: 'Playfair Display', Georgia, serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --row-height: 26px;
-    --row-height-min: 24px;
+    --row-height: 30px;
+    --row-height-min: 28px;
     --safe-margin: 0.35in;
 }
 
