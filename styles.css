@@ -423,58 +423,59 @@ body {
 
 /* ─── BLOCK HEADERS & TIER SUB-HEADERS ─── */
 .block-header {
-    font-size: 8px; padding: 4px 8px; font-weight: 600;
+    font-size: 14px; padding: 6px 8px; font-weight: 600;
     color: var(--slate); border-radius: 0;
+    margin-top: 3px;
 }
 .block-1-header { background: #F5F0E0; }
 .block-2-header { background: #E8EBF0; }
 .tier-sub-header {
-    font-size: 6.5px; padding: 3px 10px; font-weight: 700;
-    color: #667788; line-height: 1.5;
+    font-size: 11px; padding: 5px 10px; font-weight: 700;
+    color: #667788; line-height: 1.6;
 }
 .tier1-sub { background: #E8EDF3; }
 .tier23-sub { background: #EFF2E8; }
 
 /* Minimal block headers */
 .min-block-header {
-    font-size: 7.5px; padding: 3px 6px; font-weight: 600;
-    color: #333;
+    font-size: 13px; padding: 5px 6px; font-weight: 600;
+    color: #333; margin-top: 3px;
 }
 .min-block-1 { background: #F5F3EC; }
 .min-block-2 { background: #ECEEF2; }
 .min-tier-sub-header {
-    font-size: 6.5px; padding: 2px 8px; font-weight: 700;
-    color: #667788; line-height: 1.5;
+    font-size: 10px; padding: 4px 8px; font-weight: 700;
+    color: #667788; line-height: 1.6;
 }
 .min-tier1-sub { background: #F2F4F8; }
 .min-tier23-sub { background: #F0F3EC; }
 
 /* ─── TIER REFERENCE KEY ─── */
 .tier-reference-key {
-    margin: 3px 0; padding: 5px 10px;
+    margin: 4px 0; padding: 6px 10px;
     background: #F8F8F8; border: 1px solid #E0E0E0; border-radius: 4px;
 }
 .tier-ref-title {
     font-size: 7px; font-weight: 700; color: var(--navy);
     letter-spacing: 1px; margin-bottom: 3px;
 }
-.tier-ref-items { display: flex; gap: 12px; }
-.tier-ref-item { display: flex; align-items: flex-start; gap: 4px; flex: 1; }
+.tier-ref-items { display: flex; gap: 14px; }
+.tier-ref-item { display: flex; align-items: center; gap: 5px; flex: 1; }
 .tier-ref-badge {
-    display: inline-block; padding: 1px 4px; border-radius: 3px;
-    font-size: 7px; font-weight: 700; color: white; white-space: nowrap; flex-shrink: 0;
+    display: inline-block; padding: 2px 6px; border-radius: 3px;
+    font-size: 11px; font-weight: 700; color: white; white-space: nowrap; flex-shrink: 0;
 }
 .tier-ref-badge.t1 { background: #555; }
 .tier-ref-badge.t2 { background: #999; }
 .tier-ref-badge.t3 { background: #CCC; color: #333; }
-.tier-ref-text { font-size: 6.5px; color: var(--slate); line-height: 1.4; }
+.tier-ref-text { font-size: 11px; color: var(--slate); line-height: 1.4; }
 .tier-ref-text strong { color: var(--navy); }
 
 /* Minimal Tier Reference */
-.min-tier-reference-key { margin: 2px 0; padding: 3px 0; }
+.min-tier-reference-key { margin: 3px 0; padding: 4px 0; }
 .min-tier-ref-items {
-    display: flex; gap: 4px; align-items: center;
-    font-size: 6.5px; color: var(--min-gray-400); flex-wrap: wrap;
+    display: flex; gap: 6px; align-items: center;
+    font-size: 10px; color: var(--min-gray-400); flex-wrap: wrap;
 }
 .min-tier-ref-item strong { color: var(--min-black); }
 .min-tier-ref-sep { opacity: 0.3; }
