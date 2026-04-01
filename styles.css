@@ -226,19 +226,19 @@ body {
 /* Target Zone */
 .target-zone {
     background: var(--light-blue); border-radius: 6px;
-    padding: 5px 12px 4px; margin: 3px 0; flex-shrink: 0;
+    padding: 14px 12px 12px; margin: 6px 0; flex-shrink: 0;
 }
 .target-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .target-left { display: flex; flex-direction: column; gap: 4px; }
 .target-title-row { display: flex; align-items: baseline; gap: 6px; }
 .target-label { font-size: 10px; font-weight: 700; color: var(--navy); letter-spacing: 1.5px; }
 .target-desc { font-size: 8px; color: var(--slate); }
-.circle-group { display: flex; gap: 8px; }
+.circle-group { display: flex; gap: 12px; }
 .target-circle {
-    width: 34px; height: 34px; border-radius: 50%;
+    width: 46px; height: 46px; border-radius: 50%;
     border: 2px dashed #E6E6E6;
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 400; color: #E6E6E6;
+    font-size: 20px; font-weight: 400; color: #E6E6E6;
     background: white; cursor: pointer; transition: all 0.2s; user-select: none;
 }
 .target-circle:hover {
@@ -247,7 +247,7 @@ body {
 .target-circle.checked {
     background: white; color: var(--navy);
     border: 3px solid var(--navy); border-style: solid;
-    font-size: 14px; /* keep number visible */
+    font-size: 20px; /* keep number visible */
     box-shadow: 0 0 0 2px rgba(27, 42, 74, 0.15);
 }
 
@@ -430,7 +430,7 @@ body {
 .block-1-header { background: #F5F0E0; }
 .block-2-header { background: #E8EBF0; }
 .tier-sub-header {
-    font-size: 11px; padding: 5px 10px; font-weight: 700;
+    font-size: 16px; padding: 10px 10px; font-weight: 700;
     color: #667788; line-height: 1.6;
 }
 .tier1-sub { background: #E8EDF3; }
@@ -444,7 +444,7 @@ body {
 .min-block-1 { background: #F5F3EC; }
 .min-block-2 { background: #ECEEF2; }
 .min-tier-sub-header {
-    font-size: 10px; padding: 4px 8px; font-weight: 700;
+    font-size: 16px; padding: 10px 8px; font-weight: 700;
     color: #667788; line-height: 1.6;
 }
 .min-tier1-sub { background: #F2F4F8; }
