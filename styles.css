@@ -335,8 +335,8 @@ body {
 .call-table tbody tr.tier-t3 td { background: #FFFFFF !important; }
 .call-table .row-num { text-align: center; color: var(--med-gray); font-size: 7px; font-weight: 500; }
 .call-table .tier-codes {
-    text-align: center; color: #C0C0C0; font-size: 7px; letter-spacing: 1.5px;
-    cursor: pointer; user-select: none; padding: 0 2px;
+    display: flex; justify-content: space-evenly; align-items: center;
+    padding: 0; cursor: pointer; user-select: none;
 }
 .call-table .result-codes {
     text-align: center; color: #C8C8C8; font-size: 6.5px; letter-spacing: 0.3px;
@@ -409,7 +409,10 @@ body {
 .min-pill-code.tier-pill[data-value="T1"].selected { background: #555; color: white; border-color: #555; }
 .min-pill-code.tier-pill[data-value="T2"].selected { background: #999; color: white; border-color: #999; }
 .min-pill-code.tier-pill[data-value="T3"].selected { background: #CCC; color: #333; border-color: #CCC; }
-.min-tier-codes, .min-result-codes {
+.min-tier-codes {
+    display: flex; justify-content: space-evenly; align-items: center; padding: 0;
+}
+.min-result-codes {
     text-align: center; padding: 0 1px;
 }
 
