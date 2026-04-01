@@ -236,16 +236,20 @@ body {
 .circle-group { display: flex; gap: 8px; }
 .target-circle {
     width: 34px; height: 34px; border-radius: 50%;
-    border: 2.5px solid var(--slate);
+    border: 2px dashed var(--med-gray);
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 600; color: var(--slate);
-    background: white; cursor: pointer; transition: all 0.15s; user-select: none;
+    font-size: 14px; font-weight: 600; color: var(--med-gray);
+    background: white; cursor: pointer; transition: all 0.2s; user-select: none;
+}
+.target-circle:hover {
+    border-color: var(--slate); color: var(--slate); border-style: solid;
 }
 .target-circle.checked {
-    background: var(--navy); color: white; border-color: var(--navy);
+    background: white; color: var(--navy);
+    border: 3px solid var(--navy); border-style: solid;
+    font-size: 14px; /* keep number visible */
+    box-shadow: 0 0 0 2px rgba(27, 42, 74, 0.15);
 }
-.target-circle.checked::after { content: "✓"; font-size: 18px; }
-.target-circle.checked { font-size: 0; } /* hide number when checked */
 
 .target-right { display: flex; gap: 8px; align-items: flex-end; }
 .metric-box { text-align: center; }
@@ -522,12 +526,17 @@ body {
 .min-target-dots { display: flex; gap: 8px; }
 .min-dot {
     width: 28px; height: 28px; border-radius: 50%;
-    border: 2px solid var(--min-black); background: transparent;
-    cursor: pointer; transition: all 0.15s; user-select: none;
+    border: 1.5px dashed #AAAAAA; background: transparent;
+    cursor: pointer; transition: all 0.2s; user-select: none;
     display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; color: #AAAAAA;
 }
-.min-dot.checked { background: var(--min-black); }
-.min-dot.checked::after { content: "✓"; color: white; font-size: 14px; font-weight: 700; }
+.min-dot:hover { border-color: var(--min-black); color: var(--min-black); border-style: solid; }
+.min-dot.checked {
+    background: transparent; color: var(--min-black);
+    border: 2.5px solid var(--min-black); border-style: solid;
+    font-size: 12px;
+}
 .min-target-right { display: flex; gap: 8px; align-items: center; }
 .min-stat { text-align: center; }
 .min-stat span { display: block; font-size: 6.5px; font-weight: 600; color: var(--min-gray-600); letter-spacing: 0.6px; margin-bottom: 2px; }
@@ -693,6 +702,12 @@ body {
     /* Day letters print as plain text (no circles) */
     .day-circle, .min-pill { border: none !important; background: none !important; }
     .day-circle.active, .min-pill.active { text-decoration: underline !important; }
+
+    /* Target circles: print circled numbers clearly */
+    .target-circle { border-style: dashed !important; border-color: #CCCCCC !important; color: #CCCCCC !important; }
+    .target-circle.checked { border-style: solid !important; border-color: #1B2A4A !important; color: #1B2A4A !important; border-width: 2.5px !important; box-shadow: none !important; }
+    .min-dot { border-style: dashed !important; border-color: #CCCCCC !important; color: #CCCCCC !important; }
+    .min-dot.checked { border-style: solid !important; border-color: #1A1A1A !important; color: #1A1A1A !important; border-width: 2.5px !important; }
     
     /* Ensure footer stays at bottom */
     .accent-bar.bottom { margin-top: auto; }

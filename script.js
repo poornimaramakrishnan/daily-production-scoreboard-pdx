@@ -229,20 +229,24 @@ function setupClickableElements() {
     document.addEventListener('click', (e) => {
         const el = e.target;
 
-        // Target circles (1-5) — single select (radio behavior)
+        // Target circles (1-5) — multi-select toggle: click to circle, click again to uncircle
         if (el.classList.contains('clickable') && el.dataset.target) {
             const val = el.dataset.target;
-            const wasChecked = (currentData.targets_checked || []).includes(val);
+            const checked = currentData.targets_checked || [];
+            const idx = checked.indexOf(val);
 
-            // Clear all targets first (single select)
-            currentData.targets_checked = [];
-            document.querySelectorAll('[data-target]').forEach(c => c.classList.remove('checked'));
-
-            // If it wasn't already checked, select it
-            if (!wasChecked) {
-                currentData.targets_checked = [val];
-                document.querySelectorAll(`[data-target="${val}"]`).forEach(c => c.classList.add('checked'));
+            if (idx === -1) {
+                // Not yet circled — add it
+                currentData.targets_checked = [...checked, val];
+            } else {
+                // Already circled — uncircle it
+                currentData.targets_checked = checked.filter(v => v !== val);
             }
+
+            // Update both designs simultaneously
+            document.querySelectorAll('[data-target]').forEach(c => {
+                c.classList.toggle('checked', currentData.targets_checked.includes(c.dataset.target));
+            });
             triggerSave();
         }
 
