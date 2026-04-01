@@ -1,17 +1,11 @@
 {
   "date": "2026-04-01",
-  "last_updated": "2026-04-01T02:13:34.705Z",
+  "last_updated": "2026-04-01T02:13:39.249Z",
   "created": "2026-04-01T00:19:36.351Z",
   "design": "executive",
   "display_date": "Wednesday, April 1, 2026",
   "day_of_week": "Wed",
-  "targets_checked": [
-    "1",
-    "2",
-    "4",
-    "5",
-    "3"
-  ],
+  "targets_checked": [],
   "calls_made": "",
   "appts_set": "",
   "followups_sched": "",
