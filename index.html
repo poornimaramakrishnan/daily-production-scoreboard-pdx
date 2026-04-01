@@ -204,13 +204,21 @@
 
             <div class="accent-line thin"></div>
 
-            <!-- CALL LOG — 15 rows -->
+            <!-- CALL LOG — Block 1 + Block 2 -->
             <section class="call-log">
                 <div class="section-header navy">
                     <span class="section-icon">📞</span> CALL LOG
                     <div class="header-right-info">
                         <span class="section-legend">S=Spoke VM=Voicemail A=Appt NA=No Answer B=Bad# CB=Callback</span>
                     </div>
+                </div>
+
+                <!-- BLOCK 1: THE POWER HOUR -->
+                <div class="block-header block-1-header">
+                    ⏰ <strong>BLOCK 1 — The Power Hour:</strong> 1:30 – 2:30 PM
+                </div>
+                <div class="tier-sub-header tier1-sub">
+                    Tier 1 (First 30 min) — Convert fast: active leads, buyers/sellers, referrals
                 </div>
                 <table class="call-table">
                     <thead>
@@ -222,11 +230,40 @@
                             <th class="col-next">NEXT STEP</th>
                         </tr>
                     </thead>
-                    <tbody id="call-log-body"></tbody>
+                    <tbody id="call-log-body-t1"></tbody>
                 </table>
-                <div class="time-ref">
-                    ⏰ <strong>Block 1:</strong> 1:30 PM to 2:30 PM &nbsp;│&nbsp; <strong>Block 2:</strong> 4:30 PM to 5:00 PM
+                <div class="tier-sub-header tier2-sub">
+                    Tier 2 (Second 30 min) — Quick wins: past clients, sphere, sign calls
                 </div>
+                <table class="call-table">
+                    <thead>
+                        <tr>
+                            <th class="col-num">#</th>
+                            <th class="col-name">NAME</th>
+                            <th class="col-tier">TIER</th>
+                            <th class="col-result">RESULT <span class="th-hint">(circle)</span></th>
+                            <th class="col-next">NEXT STEP</th>
+                        </tr>
+                    </thead>
+                    <tbody id="call-log-body-t2"></tbody>
+                </table>
+
+                <!-- BLOCK 2: THE CLEANUP -->
+                <div class="block-header block-2-header">
+                    ⏰ <strong>BLOCK 2 — The Cleanup:</strong> 4:30 – 5:00 PM &bull; Circling back on earlier calls &amp; callbacks
+                </div>
+                <table class="call-table">
+                    <thead>
+                        <tr>
+                            <th class="col-num">#</th>
+                            <th class="col-name">NAME</th>
+                            <th class="col-tier">TIER</th>
+                            <th class="col-result">RESULT <span class="th-hint">(circle)</span></th>
+                            <th class="col-next">NEXT STEP</th>
+                        </tr>
+                    </thead>
+                    <tbody id="call-log-body-b2"></tbody>
+                </table>
             </section>
 
             <!-- TIER REFERENCE KEY -->
@@ -376,6 +413,14 @@
                     <span class="min-section-title">Call Log</span>
                     <span class="min-section-ref">S=Spoke VM=Voicemail A=Appt NA=No Answer B=Bad# CB=CB</span>
                 </div>
+
+                <!-- BLOCK 1 -->
+                <div class="min-block-header min-block-1">
+                    ⏰ <strong>Block 1 — The Power Hour:</strong> 1:30 – 2:30 PM
+                </div>
+                <div class="min-tier-sub-header min-tier1-sub">
+                    Tier 1 (First 30 min) — Convert fast: active leads, buyers/sellers, referrals
+                </div>
                 <table class="min-call-table">
                     <thead>
                         <tr>
@@ -386,7 +431,39 @@
                             <th class="min-col-next">Next Step</th>
                         </tr>
                     </thead>
-                    <tbody id="min-call-log-body"></tbody>
+                    <tbody id="min-call-log-body-t1"></tbody>
+                </table>
+                <div class="min-tier-sub-header min-tier2-sub">
+                    Tier 2 (Second 30 min) — Quick wins: past clients, sphere, sign calls
+                </div>
+                <table class="min-call-table">
+                    <thead>
+                        <tr>
+                            <th class="min-col-num"></th>
+                            <th class="min-col-name">Name</th>
+                            <th class="min-col-tier">Tier</th>
+                            <th class="min-col-result">Result</th>
+                            <th class="min-col-next">Next Step</th>
+                        </tr>
+                    </thead>
+                    <tbody id="min-call-log-body-t2"></tbody>
+                </table>
+
+                <!-- BLOCK 2 -->
+                <div class="min-block-header min-block-2">
+                    ⏰ <strong>Block 2 — The Cleanup:</strong> 4:30 – 5:00 PM &bull; Circling back on earlier calls &amp; callbacks
+                </div>
+                <table class="min-call-table">
+                    <thead>
+                        <tr>
+                            <th class="min-col-num"></th>
+                            <th class="min-col-name">Name</th>
+                            <th class="min-col-tier">Tier</th>
+                            <th class="min-col-result">Result</th>
+                            <th class="min-col-next">Next Step</th>
+                        </tr>
+                    </thead>
+                    <tbody id="min-call-log-body-b2"></tbody>
                 </table>
                 <div class="min-time-ref">⏰ Block 1: 1:30 PM to 2:30 PM │ Block 2: 4:30 PM to 5:00 PM</div>
             </section>

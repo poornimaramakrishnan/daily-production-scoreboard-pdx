@@ -18,9 +18,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     datePicker.value = today;
     DataStore.setCurrentDate(today);
 
-    // Generate table rows for both designs
-    generateCallLog('call-log-body', 'executive');
-    generateCallLog('min-call-log-body', 'minimal');
+    // Generate table rows for both designs (split into Block 1 T1, T2, Block 2)
+    generateCallLogBlock('call-log-body-t1', 'executive', 0, 4);
+    generateCallLogBlock('call-log-body-t2', 'executive', 4, 8);
+    generateCallLogBlock('call-log-body-b2', 'executive', 8, 12);
+    generateCallLogBlock('min-call-log-body-t1', 'minimal', 0, 4);
+    generateCallLogBlock('min-call-log-body-t2', 'minimal', 4, 8);
+    generateCallLogBlock('min-call-log-body-b2', 'minimal', 8, 12);
     generateMiniTable('followup-body', NUM_FOLLOWUP_ROWS, 'followup', 'executive');
     generateMiniTable('appt-body', NUM_APPT_ROWS, 'appt', 'executive');
     generateMiniTable('min-followup-body', NUM_FOLLOWUP_ROWS, 'followup', 'minimal');
@@ -44,12 +48,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // ─── TABLE GENERATION ───
-function generateCallLog(tbodyId, style) {
+function generateCallLogBlock(tbodyId, style, startIdx, endIdx) {
     const tbody = document.getElementById(tbodyId);
     if (!tbody) return;
     tbody.innerHTML = '';
 
-    for (let i = 0; i < NUM_CALL_ROWS; i++) {
+    for (let i = startIdx; i < endIdx; i++) {
         const tr = document.createElement('tr');
         tr.dataset.rowIndex = i;
 
