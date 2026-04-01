@@ -236,9 +236,9 @@ body {
 .circle-group { display: flex; gap: 8px; }
 .target-circle {
     width: 34px; height: 34px; border-radius: 50%;
-    border: 2px dashed var(--med-gray);
+    border: 2px dashed #E6E6E6;
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 600; color: var(--med-gray);
+    font-size: 14px; font-weight: 400; color: #E6E6E6;
     background: white; cursor: pointer; transition: all 0.2s; user-select: none;
 }
 .target-circle:hover {
