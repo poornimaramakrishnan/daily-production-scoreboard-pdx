@@ -1,11 +1,13 @@
 {
-  "date": "2026-04-15",
-  "last_updated": "2026-04-01T00:59:17.512Z",
-  "created": "2026-04-01T00:58:15.768Z",
+  "date": "2026-04-01",
+  "last_updated": "2026-04-01T01:17:01.769Z",
+  "created": "2026-04-01T00:19:36.351Z",
   "design": "executive",
   "display_date": "Wednesday, April 1, 2026",
-  "day_of_week": "Wed",
-  "targets_checked": [],
+  "day_of_week": "Fri",
+  "targets_checked": [
+    "1"
+  ],
   "calls_made": "",
   "appts_set": "",
   "followups_sched": "",
@@ -14,12 +16,6 @@
   "call_log": [
     {
       "name": "",
-      "tier": "T1",
-      "result": "NA",
-      "next_step": ""
-    },
-    {
-      "name": "",
       "tier": "",
       "result": "",
       "next_step": ""
@@ -33,7 +29,13 @@
     {
       "name": "",
       "tier": "",
-      "result": "VM",
+      "result": "",
+      "next_step": ""
+    },
+    {
+      "name": "",
+      "tier": "",
+      "result": "",
       "next_step": ""
     },
     {
