@@ -300,12 +300,25 @@ function setupClickableElements() {
             triggerSave();
         }
 
-        // Day circles
+        // Day circles — bidirectional: clicking a day navigates to nearest date for that weekday
         if ((el.classList.contains('day-circle') || el.classList.contains('min-pill')) && el.dataset.day) {
-            document.querySelectorAll('.day-circle, .min-pill').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll(`[data-day="${el.dataset.day}"]`).forEach(c => c.classList.add('active'));
-            currentData.day_of_week = el.dataset.day;
-            triggerSave();
+            const clickedDay = el.dataset.day;
+            const dayMap = { 'Sun': 0, 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6 };
+            const targetDow = dayMap[clickedDay];
+            if (targetDow !== undefined) {
+                // Get current date and find the nearest date with that day-of-week
+                const current = new Date(DataStore.getCurrentDate() + 'T12:00:00');
+                const currentDow = current.getDay();
+                let diff = targetDow - currentDow;
+                // Prefer the nearest occurrence: same week if within ±3 days, else next week
+                if (diff > 3) diff -= 7;
+                if (diff < -3) diff += 7;
+                const newDate = new Date(current);
+                newDate.setDate(newDate.getDate() + diff);
+                const newDateStr = DataStore.formatDate(newDate);
+                document.getElementById('dateSelect').value = newDateStr;
+                loadDate(newDateStr);
+            }
         }
     });
 }
@@ -330,6 +343,23 @@ function setupContentEditableListeners() {
                     other.textContent = text;
                 }
             });
+
+            // Bidirectional sync: if user edits display_date, parse and update day + date picker
+            if (field === 'display_date' && text) {
+                const parsed = new Date(text);
+                if (!isNaN(parsed.getTime())) {
+                    const newDateStr = DataStore.formatDate(parsed);
+                    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                    const dayName = days[parsed.getDay()];
+                    currentData.day_of_week = dayName;
+                    document.getElementById('dateSelect').value = newDateStr;
+                    DataStore.setCurrentDate(newDateStr);
+                    // Update day highlights
+                    document.querySelectorAll('.day-circle, .min-pill').forEach(c => {
+                        c.classList.toggle('active', c.dataset.day === dayName);
+                    });
+                }
+            }
         }
         // Call log fields
         else if (field === 'call_name') {
