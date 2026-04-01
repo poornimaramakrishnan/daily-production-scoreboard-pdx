@@ -3,9 +3,10 @@
    15-row call log · Interactive data entry · Auto-save
    ============================================================ */
 
-const NUM_CALL_ROWS = 12;
-const NUM_FOLLOWUP_ROWS = 5;
-const NUM_APPT_ROWS = 5;
+const NUM_CALL_ROWS = 15;
+const NUM_FOLLOWUP_ROWS = 3;
+const NUM_APPT_ROWS = 3;
+const NUM_OPPS_ROWS = 3;
 
 let currentData = null;
 let currentDesign = 'executive';
@@ -18,15 +19,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     datePicker.value = today;
     DataStore.setCurrentDate(today);
 
-    // Generate table rows for both designs (split into Block 1 T1, T2, Block 2)
-    generateCallLogBlock('call-log-body-t1', 'executive', 0, 4);
-    generateCallLogBlock('call-log-body-t2', 'executive', 4, 8);
-    generateCallLogBlock('call-log-body-b2', 'executive', 8, 12);
-    generateCallLogBlock('min-call-log-body-t1', 'minimal', 0, 4);
-    generateCallLogBlock('min-call-log-body-t2', 'minimal', 4, 8);
-    generateCallLogBlock('min-call-log-body-b2', 'minimal', 8, 12);
+    // Generate table rows for both designs (5 rows per block, own numbering)
+    generateCallLogBlock('call-log-body-t1', 'executive', 0, 5);
+    generateCallLogBlock('call-log-body-t2', 'executive', 5, 10);
+    generateCallLogBlock('call-log-body-b2', 'executive', 10, 15);
+    generateCallLogBlock('min-call-log-body-t1', 'minimal', 0, 5);
+    generateCallLogBlock('min-call-log-body-t2', 'minimal', 5, 10);
+    generateCallLogBlock('min-call-log-body-b2', 'minimal', 10, 15);
     generateMiniTable('followup-body', NUM_FOLLOWUP_ROWS, 'followup', 'executive');
     generateMiniTable('appt-body', NUM_APPT_ROWS, 'appt', 'executive');
+    generateMiniTable('opps-body', NUM_OPPS_ROWS, 'opps', 'executive');
     generateMiniTable('min-followup-body', NUM_FOLLOWUP_ROWS, 'followup', 'minimal');
     generateMiniTable('min-appt-body', NUM_APPT_ROWS, 'appt', 'minimal');
 
@@ -56,10 +58,11 @@ function generateCallLogBlock(tbodyId, style, startIdx, endIdx) {
     for (let i = startIdx; i < endIdx; i++) {
         const tr = document.createElement('tr');
         tr.dataset.rowIndex = i;
+        const displayNum = (i % 5) + 1;
 
         if (style === 'executive') {
             tr.innerHTML = `
-                <td class="row-num">${i + 1}</td>
+                <td class="row-num">${displayNum}</td>
                 <td contenteditable="true" data-field="call_name" data-row="${i}"></td>
                 <td class="tier-codes">
                     <span class="code-pill tier-pill clickable" data-field="call_tier" data-row="${i}" data-value="T1">T1</span>
@@ -78,7 +81,7 @@ function generateCallLogBlock(tbodyId, style, startIdx, endIdx) {
             `;
         } else {
             tr.innerHTML = `
-                <td style="text-align:center;color:#A0A0A0;font-size:7px;">${i + 1}</td>
+                <td style="text-align:center;color:#A0A0A0;font-size:7px;">${displayNum}</td>
                 <td contenteditable="true" data-field="call_name" data-row="${i}"></td>
                 <td class="tier-codes min-tier-codes">
                     <span class="code-pill min-pill-code tier-pill clickable" data-field="call_tier" data-row="${i}" data-value="T1">1</span>
@@ -107,12 +110,27 @@ function generateMiniTable(tbodyId, count, type, style) {
 
     for (let i = 0; i < count; i++) {
         const tr = document.createElement('tr');
-        const field1 = type === 'followup' ? 'fu_name' : 'appt_name';
-        const field2 = type === 'followup' ? 'fu_why' : 'appt_details';
-        tr.innerHTML = `
-            <td contenteditable="true" data-field="${field1}" data-row="${i}"></td>
-            <td contenteditable="true" data-field="${field2}" data-row="${i}"></td>
-        `;
+        if (type === 'followup') {
+            tr.innerHTML = `
+                <td contenteditable="true" data-field="fu_name" data-row="${i}"></td>
+                <td contenteditable="true" data-field="fu_why" data-row="${i}"></td>
+            `;
+        } else if (type === 'appt') {
+            tr.innerHTML = `
+                <td contenteditable="true" data-field="appt_name" data-row="${i}"></td>
+            `;
+        } else if (type === 'opps') {
+            tr.innerHTML = `
+                <td contenteditable="true" data-field="opps_name" data-row="${i}"></td>
+            `;
+        } else {
+            const field1 = 'appt_name';
+            const field2 = 'appt_details';
+            tr.innerHTML = `
+                <td contenteditable="true" data-field="${field1}" data-row="${i}"></td>
+                <td contenteditable="true" data-field="${field2}" data-row="${i}"></td>
+            `;
+        }
         tbody.appendChild(tr);
     }
 }

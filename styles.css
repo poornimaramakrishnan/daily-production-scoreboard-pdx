@@ -429,11 +429,11 @@ body {
 .block-1-header { background: #F5F0E0; }
 .block-2-header { background: #E8EBF0; }
 .tier-sub-header {
-    font-size: 7px; padding: 2px 10px; font-style: italic;
-    color: #667788;
+    font-size: 6.5px; padding: 3px 10px; font-weight: 700;
+    color: #667788; line-height: 1.5;
 }
 .tier1-sub { background: #E8EDF3; }
-.tier2-sub { background: #EFF2E8; }
+.tier23-sub { background: #EFF2E8; }
 
 /* Minimal block headers */
 .min-block-header {
@@ -443,11 +443,11 @@ body {
 .min-block-1 { background: #F5F3EC; }
 .min-block-2 { background: #ECEEF2; }
 .min-tier-sub-header {
-    font-size: 6.5px; padding: 2px 8px; font-style: italic;
-    color: #667788;
+    font-size: 6.5px; padding: 2px 8px; font-weight: 700;
+    color: #667788; line-height: 1.5;
 }
 .min-tier1-sub { background: #F2F4F8; }
-.min-tier2-sub { background: #F0F3EC; }
+.min-tier23-sub { background: #F0F3EC; }
 
 /* ─── TIER REFERENCE KEY ─── */
 .tier-reference-key {
@@ -482,6 +482,8 @@ body {
 /* ─── DUAL SECTION ─── */
 .dual-section { display: flex; gap: 8px; margin: 2px 0; flex-shrink: 0; }
 .dual-left, .dual-right { flex: 1; }
+.dual-right-split { display: flex; gap: 4px; }
+.dual-right-split .dual-col { flex: 1; }
 .dual-header-stack {
     display: flex; flex-direction: column; gap: 0; padding: 2px 10px !important;
 }
