@@ -371,6 +371,18 @@ body {
     font-weight: 700;
 }
 
+/* Tier pills styled like tier-ref-badge */
+.code-pill.tier-pill { color: #BABABA; }
+.code-pill.tier-pill[data-value="T1"]         { background: #E0E0E0; color: #999; border-color: #E0E0E0; }
+.code-pill.tier-pill[data-value="T2"]         { background: #EBEBEB; color: #AAA; border-color: #EBEBEB; }
+.code-pill.tier-pill[data-value="T3"]         { background: #F2F2F2; color: #BBB; border-color: #F2F2F2; }
+.code-pill.tier-pill[data-value="T1"].selected { background: #555; color: white; border-color: #555; }
+.code-pill.tier-pill[data-value="T2"].selected { background: #999; color: white; border-color: #999; }
+.code-pill.tier-pill[data-value="T3"].selected { background: #CCC; color: #333; border-color: #CCC; }
+.code-pill.tier-pill:hover[data-value="T1"]   { background: #555; color: white; border-color: #555; }
+.code-pill.tier-pill:hover[data-value="T2"]   { background: #999; color: white; border-color: #999; }
+.code-pill.tier-pill:hover[data-value="T3"]   { background: #CCC; color: #333; border-color: #CCC; }
+
 /* Minimal design pills */
 .min-pill-code {
     font-size: 6.5px;
@@ -389,6 +401,14 @@ body {
     color: white;
     border-color: #1A1A1A;
 }
+
+/* Minimal tier pills styled like badges */
+.min-pill-code.tier-pill[data-value="T1"]          { background: #E0E0E0; color: #888; border-color: #E0E0E0; }
+.min-pill-code.tier-pill[data-value="T2"]          { background: #EBEBEB; color: #AAA; border-color: #EBEBEB; }
+.min-pill-code.tier-pill[data-value="T3"]          { background: #F2F2F2; color: #BBB; border-color: #F2F2F2; }
+.min-pill-code.tier-pill[data-value="T1"].selected { background: #555; color: white; border-color: #555; }
+.min-pill-code.tier-pill[data-value="T2"].selected { background: #999; color: white; border-color: #999; }
+.min-pill-code.tier-pill[data-value="T3"].selected { background: #CCC; color: #333; border-color: #CCC; }
 .min-tier-codes, .min-result-codes {
     text-align: center; padding: 0 1px;
 }

@@ -62,9 +62,9 @@ function generateCallLogBlock(tbodyId, style, startIdx, endIdx) {
                 <td class="row-num">${i + 1}</td>
                 <td contenteditable="true" data-field="call_name" data-row="${i}"></td>
                 <td class="tier-codes">
-                    <span class="code-pill clickable" data-field="call_tier" data-row="${i}" data-value="T1">T1</span>
-                    <span class="code-pill clickable" data-field="call_tier" data-row="${i}" data-value="T2">T2</span>
-                    <span class="code-pill clickable" data-field="call_tier" data-row="${i}" data-value="T3">T3</span>
+                    <span class="code-pill tier-pill clickable" data-field="call_tier" data-row="${i}" data-value="T1">T1</span>
+                    <span class="code-pill tier-pill clickable" data-field="call_tier" data-row="${i}" data-value="T2">T2</span>
+                    <span class="code-pill tier-pill clickable" data-field="call_tier" data-row="${i}" data-value="T3">T3</span>
                 </td>
                 <td class="result-codes">
                     <span class="code-pill clickable" data-field="call_result" data-row="${i}" data-value="S">S</span>
@@ -81,9 +81,9 @@ function generateCallLogBlock(tbodyId, style, startIdx, endIdx) {
                 <td style="text-align:center;color:#A0A0A0;font-size:7px;">${i + 1}</td>
                 <td contenteditable="true" data-field="call_name" data-row="${i}"></td>
                 <td class="tier-codes min-tier-codes">
-                    <span class="code-pill min-pill-code clickable" data-field="call_tier" data-row="${i}" data-value="T1">1</span>
-                    <span class="code-pill min-pill-code clickable" data-field="call_tier" data-row="${i}" data-value="T2">2</span>
-                    <span class="code-pill min-pill-code clickable" data-field="call_tier" data-row="${i}" data-value="T3">3</span>
+                    <span class="code-pill min-pill-code tier-pill clickable" data-field="call_tier" data-row="${i}" data-value="T1">1</span>
+                    <span class="code-pill min-pill-code tier-pill clickable" data-field="call_tier" data-row="${i}" data-value="T2">2</span>
+                    <span class="code-pill min-pill-code tier-pill clickable" data-field="call_tier" data-row="${i}" data-value="T3">3</span>
                 </td>
                 <td class="result-codes min-result-codes">
                     <span class="code-pill min-pill-code clickable" data-field="call_result" data-row="${i}" data-value="S">S</span>
