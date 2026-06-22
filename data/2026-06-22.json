@@ -1,8 +1,8 @@
 {
   "date": "2026-06-22",
-  "last_updated": "2026-06-22T20:14:24.560Z",
+  "last_updated": "2026-06-22T20:14:53.148Z",
   "created": "2026-06-22T20:08:53.631Z",
-  "design": "minimal",
+  "design": "executive",
   "display_date": "Monday, June 22, 2026",
   "day_of_week": "Mon",
   "targets_checked": [],
@@ -131,5 +131,5 @@
   ],
   "review_worked": "",
   "review_didnt_work": "",
-  "review_improve": "a?/a?/a?/a?/a?/"
+  "review_improve": "a?/a?/a?/a?/a?/a?/"
 }
